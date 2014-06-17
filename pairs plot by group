@@ -1,0 +1,32 @@
+
+# seperate panel smooth ---------------------------------------------------
+
+# Use the first 4 variables of USJudgeRatings and add a group variable with two levels
+USJudgeRatings <- USJudgeRatings[,1:4]
+USJudgeRatings$group <- factor(c(rep(1, 22), rep(0, 21)))
+
+# I can draw a pairs graph where members of each group are drawn in different colors:
+  
+  pairs(USJudgeRatings[,1:4], col = c(2,3)[USJudgeRatings$group], pch =
+          c(21,3)[USJudgeRatings$group])
+
+# I would also like to add a smooth line to each subplot like
+pairs(USJudgeRatings[,1:4], panel=panel.smooth)
+
+# but I want the smooth to be done for each of the group, i.e. I want two smooths per subplot.
+
+# this creates only one smooth
+pairs(USJudgeRatings[,1:4], col = c(2,3)[USJudgeRatings$group], pch =
+        c(21,3)[USJudgeRatings$group], panel = panel.smooth) 
+
+
+
+
+# solution using lattice --------------------------------------------------
+
+library(lattice)
+
+par(mfrow=c(1,2))
+splom( ~USJudgeRatings[,1:4], groups=group, data=USJudgeRatings, type=c('p','smooth'))
+
+splom( ~USJudgeRatings[,1:4], groups=group, data=USJudgeRatings, type=c('p','r'))
