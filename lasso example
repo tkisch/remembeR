@@ -1,0 +1,44 @@
+d.ex<- read.table("http://www-stat.stanford.edu/~tibs/ElemStatLearn/datasets/prostate.data", header=T)
+
+# full modell
+
+formula(l.full)
+library(regr0)
+
+
+l.full <- regr(lpsa~., data=d.ex)
+
+plot(l.full)
+
+summary(l.full)
+require(regr0)
+
+# Stahel Lassogrp
+
+source("http://stat.ethz.ch/~stahel/regression/lassogrp.R")
+
+r.lasso <- lasso(formula(l.full), data=d.ex)
+str(r.lasso)
+
+r.lasso$lasso.terms
+
+# plot to find optimal lambda (minimum log-likelihood and penalty)
+
+par(mfrow=c(1,2))
+plot(r.lasso, type="norms")
+plot(r.lasso, type="criteria", cv=T)
+
+#extract modell with specific lamda
+
+e.lasso <- extract.lassogrp(r.lasso, lambda=20)
+e.lasso
+formula(e.lasso)
+formula(l.full)
+
+# regression with this modell
+
+lm.lasso <- regr(formula(e.lasso), data=d.ex)
+
+# check assumptions
+
+plot(lm.lasso)
