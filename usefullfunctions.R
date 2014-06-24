@@ -4,7 +4,7 @@
 # pkg <- c("sfsmisc","MASS","nnet","regr0")
 # as.matrix(pkg)
 
-inst <- function(x){
+chkinst <- function(x){
   require(x) || install.packages(x)
   
 }
