@@ -9,3 +9,7 @@ inst <- function(x){
 }
 
 apply(as.matrix(pkg), 2, inst)
+
+# regr0 package (W.Stahel ETHZ)
+
+source("http://stat.ethz.ch/~stahel/regression/regr.R")
