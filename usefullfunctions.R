@@ -14,3 +14,4 @@ chkinst <- function(x){
 ###########################################################
 # regr0 package (W.Stahel ETHZ)
 # source("http://stat.ethz.ch/~stahel/regression/regr.R")
+# install.packages("regr0", repos="http://R-Forge.R-project.org")
