@@ -1,0 +1,17 @@
+# http://www.r-bloggers.com/calendar-charts-with-googlevis/
+
+# various packages need to be installed from github (vgl.devtools) (developer versions...)
+
+Cal <- gvisCalendar(Cairo, 
+                    datevar="Date", 
+                    numvar="Temp",
+                    options=list(
+                      title="Daily temperature in Cairo",
+                      height=320,
+                      calendar="{yearLabel: { fontName: 'Times-Roman',
+                               fontSize: 32, color: '#1A8763', bold: true},
+                               cellSize: 10,
+                               cellColor: { stroke: 'red', strokeOpacity: 0.2 },
+                               focusedCellColor: {stroke:'red'}}")
+)
+plot(Cal)
