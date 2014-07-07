@@ -1,0 +1,40 @@
+---
+title: "Untitled"
+author: "Name1"
+date: "06/25/2014"
+output: ioslides_presentation
+runtime: shiny
+---
+
+
+## Slide with Interactive Plot
+
+```{r, echo=FALSE}
+suppressPackageStartupMessages(require(googleVis))
+inputPanel(
+  selectInput("select", 
+        label = "Select G1 or G2",
+        choices = list("G1", "G2"),
+        selected = "G1")
+)
+
+output$test <- renderGvis({
+  if(input$select=="G1"){
+    G1 <- gvisGeoMap(Exports, locationvar='Country', numvar='Profit',
+                 options=list(dataMode="regions", width="100%")
+                 , chartid = 'mychart') 
+
+    G1
+  }else{
+    G2 <- gvisGeoMap(CityPopularity, locationvar='City', numvar='Popularity',
+                 options=list(region='US', height=350, width="100%", 
+                              dataMode='markers',
+                              colors='[0xFF8747, 0xFFB581, 0xc06000]'
+                              ), chartid = 'mychart') 
+    G2
+  }
+
+})
+htmlOutput("test")
+
+```
